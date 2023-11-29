@@ -136,10 +136,10 @@ function FatPercentage() {
           <center className="mt-4">{fatPercent}</center>
 
           <div id="bodyFatBar">
-            <div class="barSegment underweight" id="underweight"></div>
-            <div class="barSegment healthy" id="healthy"></div>
-            <div class="barSegment overweight" id="overweight"></div>
-            <div class="barSegment obese" id="obese"></div>
+            <div className="barSegment underweight" id="underweight"></div>
+            <div className="barSegment healthy" id="healthy"></div>
+            <div className="barSegment overweight" id="overweight"></div>
+            <div className="barSegment obese" id="obese"></div>
             <div id="marker"></div>
           </div>
         </div>

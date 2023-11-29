@@ -77,7 +77,7 @@ export default function BMI() {
           validationStatus={validationStatus}
         />
 
-        <button class="button button-calc" onClick={calculateBMI} disabled={Object.values(validationStatus).includes(false)}>
+        <button className="button button-calc" onClick={calculateBMI} disabled={Object.values(validationStatus).includes(false)}>
           Calculate
         </button>
       </div>
