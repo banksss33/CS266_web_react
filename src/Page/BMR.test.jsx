@@ -3,6 +3,15 @@ import React from "react";
 import '@testing-library/jest-dom'
 import BMR from './BMR';
 
+/*spec 
+1.display (render without err)
+2. input onchange?
+3. enter valid input and right result + picture
+4. handle invaild input
+*/
+
+
+
 describe('Display correctly BMR page', () => {  // Display BMI calculator
     it('Should have a heading with the text "BMI Calculator"', () => {
       render(<BMR />);
