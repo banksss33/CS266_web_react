@@ -8,6 +8,7 @@ import BMI from "../Page/BMI";
 import FatPercentage from "../Page/FatPercentage";
 import "../Style/SideNavBar.css";
 import { LuMenuSquare } from "react-icons/lu";
+import { MdPlayArrow } from "react-icons/md";
 
 function SideNavBar() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -18,21 +19,21 @@ function SideNavBar() {
   return (
     <div>
       <BrowserRouter>
-      <Button
+        <Button
           variant="primary"
+          // onMouseOver={handleShow}
           onClick={handleShow}
-
           style={{
             position: "fixed",
-            top: 0,
+            height : '100%',
+            top : 0,
             left: 0,
             zIndex: 1000, // Adjust as needed based on your layout
-            backgroundColor:'rgb(255, 122, 56)',
-            border: '0',
-            
+            backgroundColor: "rgb(255, 122, 56)",
+            border: "0",
           }}
         >
-          <LuMenuSquare
+          <MdPlayArrow
             style={{
               height: "40px",
               width: "40px",
@@ -47,28 +48,39 @@ function SideNavBar() {
           scroll={true}
         >
           <Offcanvas.Header closeButton style={{ backgroundColor: "white" }}>
-            <Offcanvas.Title class="navtitle"><i class='bx bx-dumbbell' style={{ marginRight: '16px' }}></i>CS266 N03</Offcanvas.Title>
+            <Offcanvas.Title class="navtitle">
+              <i class="bx bx-dumbbell" style={{ marginRight: "16px" }}></i>
+              CS266 N03
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body style={{ backgroundColor: "white" }}>
-            
-              <div className="d-grid gap-2">
-                <LinkContainer to="/react-bmi">
-                  <Link className="link-text">
-                    <button type="button" class="btn btn-outline-warning sideNavBar-button btn-lg">
-                      <i class='bx bx-calculator' style={{ marginRight: '16px' }}></i>
-                      BMI Calculator
-                    </button>
-                  </Link>
-                </LinkContainer>
-                <LinkContainer to="/FatCal">
-                  <Link className="link-text">
-                    <button type="button" class="btn btn-outline-warning sideNavBar-button btn-lg">
-                    <i class='bx bx-body' style={{ marginRight: '16px' }}></i>
-                      Fat Percentage Calculator
-                    </button>
-                  </Link>
-                </LinkContainer>
-              </div>
+            <div className="d-grid gap-2">
+              <LinkContainer to="/react-bmi">
+                <Link className="link-text">
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning sideNavBar-button btn-lg"
+                  >
+                    <i
+                      class="bx bx-calculator"
+                      style={{ marginRight: "16px" }}
+                    ></i>
+                    BMI Calculator
+                  </button>
+                </Link>
+              </LinkContainer>
+              <LinkContainer to="/FatCal">
+                <Link className="link-text">
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning sideNavBar-button btn-lg"
+                  >
+                    <i class="bx bx-body" style={{ marginRight: "16px" }}></i>
+                    Fat Percentage Calculator
+                  </button>
+                </Link>
+              </LinkContainer>
+            </div>
           </Offcanvas.Body>
         </Offcanvas>
 
