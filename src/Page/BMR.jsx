@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../Style/FatPercentage.css";
-import "../Style/BMI.css";
+import "../Style/BMR.css";
+// import "../Style/BMI.css";
 import InputBox from "../component/InputBox";
 
 function BMR() {
@@ -11,12 +11,13 @@ function BMR() {
   const [freqE, setFreqE] = useState("");
   const [BMR, setBMR] = useState("");
   const [resetFlag, setResetFlag] = useState(false);
-  
+  const [displayImage, setDisplayImage] = useState(null);
+  const [displayAlt, setdisplayAlt] = useState(null);
   //
   const [validationStatus, setValidationStatus] = useState({
     height: true,
     width: true,
-    gendeer: true,
+    gender: true,
   });
 
   const handleValidation = (dataType, isValid) => {
@@ -28,20 +29,50 @@ function BMR() {
   //
 
   const clearFields = () => {
-    document.getElementById('bodyFatBar').style.display = 'none';
+    // document.getElementById("bodyFatBar").style.display = "none";
     setGender("");
     setBMR("");
-    setResetFlag(prev => !prev);
+    setFreqE("");
+    setHeight("");
+    setWeight("");
+    setDisplayImage(null);
+    setdisplayAlt(null);
+    setResetFlag((prev) => !prev);
   };
 
   const BMRCal = () => {
+    let bmrAns = 0;
     if(gender === 'M') {
         setBMR("BMR: " + ((66 + (13.7*weight) + (5*height) - (6.8*age))*freqE) + " Calories");
+      bmrAns = ((66 + (13.7*weight) + (5*height) - (6.8*age))*freqE) 
     }else if(gender === 'F'){
         setBMR("BMR: " + ((665 + (9.6*weight) + (1.8*height) - (4.7*age))*freqE) + " Calories");
+      bmrAns = ((665 + (9.6*weight) + (1.8*height) - (4.7*age))*freqE) 
     }else{
         setBMR("");
     }
+
+
+    // case show flame pic
+    if (bmrAns <= 0) {
+      setDisplayImage(require("../img/fpic/f1.jpg"));
+      setdisplayAlt("f1.jpg");
+    } else if (bmrAns <= 1500) {
+      setDisplayImage(require("../img/fpic/f2.jpg"));
+      setdisplayAlt("f2.jpg");
+    } else if (bmrAns <= 2000) {
+      setDisplayImage(require("../img/fpic/f3.jpg"));
+      setdisplayAlt("f2.jpg");
+    } else if (bmrAns <= 2300) {
+      setDisplayImage(require("../img/fpic/f4.jpg"));
+      setdisplayAlt("f3.jpg");
+    } else if (bmrAns <= 2500) {
+      setDisplayImage(require("../img/fpic/f5.jpg"));
+      setdisplayAlt("f4.jpg");
+    } else if (bmrAns > 2500) {
+      setDisplayImage(require("../img/fpic/f5.jpg"));
+      setdisplayAlt("f5.jpg");
+    } 
   };
 
   return (
@@ -120,10 +151,25 @@ function BMR() {
 
               <div className="d-grid gap-2">
                 <p>
-                  <button className="button button-calc" type="button" disabled={Object.values(validationStatus).includes(false) || gender === ""} onClick={BMRCal}>
+                  <button
+                    className="button button-calc"
+                    type="button"
+                    disabled={
+                      Object.values(validationStatus).includes(false) ||
+                      gender === "" ||
+                      height === "" ||
+                      weight === "" ||
+                      age === ""
+                    }
+                    onClick={BMRCal}
+                  >
                     Calculate
                   </button>
-                  <button className="button button-clear" type="button" onClick={clearFields}>
+                  <button
+                    className="button button-clear"
+                    type="button"
+                    onClick={clearFields}
+                  >
                     Clear
                   </button>
                 </p>
@@ -133,23 +179,17 @@ function BMR() {
           
           <center className="mt-4">{BMR}</center>
 
-          <div id="bodyFatBar">
-            <div className="barSegment underweight" id="underweight"></div>
-            <div className="barSegment healthy" id="healthy"></div>
-            <div className="barSegment overweight" id="overweight"></div>
-            <div className="barSegment obese" id="obese"></div>
-            <div id="marker"></div>
-          </div>
+          
         </div>
 
         <div className="col-md-6">
           <div className="card">
-            <div className="crd-header">Right Side Content</div>
+            <div className="crd-header">Here you result</div>
             <div className="card-body card-body-center">
               <img
-                src="https://www-assets.withings.com/pages/health-insights/about-body-fat/media/body-fat-chart-w-mobile.png"
-                alt="Additional Content"
-                style={{ width: "60%", height: "auto" }}
+                src={displayImage}
+                alt={displayAlt}
+                style={{ width: "auto", height: "95%" }}
               />
             </div>
           </div>
