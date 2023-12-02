@@ -8,7 +8,7 @@ function BMR() {
   const [weight, setWeight] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
-  const [freqE, setFreqE] = useState("");
+  const [freqE, setFreqE] = useState("1.2");
   const [BMR, setBMR] = useState("");
   const [resetFlag, setResetFlag] = useState(false);
   const [displayImage, setDisplayImage] = useState(null);
@@ -43,10 +43,10 @@ function BMR() {
   const BMRCal = () => {
     let bmrAns = 0;
     if(gender === 'M') {
-        setBMR("BMR: " + ((66 + (13.7*weight) + (5*height) - (6.8*age))*freqE) + " Calories");
+        setBMR("BMR: " + ((66 + (13.7*weight) + (5*height) - (6.8*age))*freqE).toFixed(2) + " Calories");
       bmrAns = ((66 + (13.7*weight) + (5*height) - (6.8*age))*freqE) 
     }else if(gender === 'F'){
-        setBMR("BMR: " + ((665 + (9.6*weight) + (1.8*height) - (4.7*age))*freqE) + " Calories");
+        setBMR("BMR: " + ((665 + (9.6*weight) + (1.8*height) - (4.7*age))*freqE).toFixed(2) + " Calories");
       bmrAns = ((665 + (9.6*weight) + (1.8*height) - (4.7*age))*freqE) 
     }else{
         setBMR("");
